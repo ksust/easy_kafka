@@ -1,0 +1,9 @@
+name: app_name
+
+kafka: # kafka config
+  bootstrap_servers: 127.0.0.1:9092 # kafka servers, multiple, 172.1.0.2:9092,172.1.0.1:9092
+  group_id: group # consumer group
+  topic_subscribe: # topic, multiple
+    - topic1
+    - topic2
+  topic_produce: topic1_result # producer default topic
