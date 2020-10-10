@@ -1,3 +1,5 @@
+import threading
+
 from kafka import KafkaConsumer
 
 from .kafka_config import EasyKafkaConfig
@@ -31,14 +33,19 @@ class EasyKafkaConsumer:
     def __next__(self):
         return self.consumer.__next__()
 
-    def subscribe(self, fn):
+    def subscribe(self, fn, thread=False):
         """
-        subscribe with callback fn(record), blocked
+        subscribe with callback fn(record), blocked default(thread=False)
         def task(record):
             ...
         kafka_consumer.subscribe(task)
         :param fn: method, require one parameter
+        :param thread: new thread to handle if thread=True
         """
+        self.logger.info('consumer task started, mode={}'.format('async' if thread else 'blocked'))
         for record in self:
             self.logger.info('received topic: {}, msg: {}'.format(record.topic, record.value))
-            fn(record)
+            if thread:
+                threading.Thread(target=fn, args=(record,)).start()
+            else:
+                fn(record)

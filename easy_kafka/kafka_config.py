@@ -23,8 +23,8 @@ class EasyKafkaConfig:
         with open(yml_path, encoding='UTF-8') as f:
             data = f.read()
             conf = yaml.load(data, Loader=yaml.FullLoader)
-            self.bootstrap_servers = conf['kafka']['bootstrap_servers']
-            self.group_id = conf['kafka']['group_id']
-            self.topic_subscribe = conf['kafka']['topic_subscribe']
-            self.topic_produce = conf['kafka']['topic_produce']
+            self.bootstrap_servers = conf['kafka'].get('bootstrap_servers')
+            self.group_id = conf['kafka'].get('group_id')
+            self.topic_subscribe = conf['kafka'].get('topic_subscribe')
+            self.topic_produce = conf['kafka'].get('topic_produce')
             self.logger.info('KafkaConfig: yml parse done')

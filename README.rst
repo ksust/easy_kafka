@@ -2,6 +2,14 @@ easy_kafka
 ^^^^^^^^^^
 Easy to use python kafka(for kb first)
 
+As a message queue, Kafka has the following characteristics:
+
+* Stable, No data loss.
+* Save sent messages.
+* Allow larger data.
+* Allow slower speed.
+
+
 Quick Start
 -----------
 **Installation**: pip install easy_kafka
